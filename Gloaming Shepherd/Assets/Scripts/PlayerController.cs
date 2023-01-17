@@ -36,7 +36,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        playerInputs.Default.Walk.performed += UpdateMoveVector;
+        // When the player is moving, update the move vector
+        playerInputs.Default.Walk.performed += ctx => { moveVector = new Vector3(ctx.ReadValue<Vector2>().x, 0f, ctx.ReadValue<Vector2>().y); };
         playerInputs.Default.Walk.canceled += ctx => { moveVector = Vector3.zero; };
 
         rb = GetComponent<Rigidbody>();
@@ -56,18 +57,6 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         rb.AddForce(moveVector * moveSpeed, ForceMode.VelocityChange);
-    }
-
-    /// <summary>
-    /// Update moveVector when a new Walk vector is input by the player.
-    /// This is done in a separate method rather than FixedUpdate() so that
-    /// moveVector only creates new Vector3 when a new input is given, rather
-    /// than every FixedUpdate cycle.
-    /// </summary>
-    /// <param name="ctx">The Walk InputAction callback context</param>
-    private void UpdateMoveVector(InputAction.CallbackContext ctx)
-    {
-        moveVector = new Vector3(ctx.ReadValue<Vector2>().x, 0f, ctx.ReadValue<Vector2>().y);
     }
 
     /// <summary>
