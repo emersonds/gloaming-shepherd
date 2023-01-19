@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
 
     // Components - These are attached in the Inspector
     private Rigidbody rb;
+    private SpriteRenderer sr;
 
     // Player Input Action Asset
     private PlayerInputs playerInputs;
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour
         playerInputs.Default.Walk.canceled += ctx => { moveVector = Vector3.zero; };
 
         rb = GetComponent<Rigidbody>();
+        sr = GetComponentInChildren<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -57,6 +59,15 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         rb.AddForce(moveVector * moveSpeed, ForceMode.Impulse);
+        
+        if (rb.velocity.x > 0f)
+        {
+            sr.flipX = false;
+        }
+        else if (rb.velocity.x < 0f)
+        {
+            sr.flipX = true;
+        }
     }
 
     /// <summary>
