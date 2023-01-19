@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        rb.AddForce(moveVector * moveSpeed, ForceMode.VelocityChange);
+        rb.AddForce(moveVector * moveSpeed, ForceMode.Impulse);
     }
 
     /// <summary>
