@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    #region Fields
+
     // Player Stats
     [SerializeField, Tooltip("How fast the player walks.")]
     private float moveSpeed = 1f;
@@ -18,6 +20,14 @@ public class PlayerController : MonoBehaviour
 
     // Used to move the player from movement input action
     private Vector3 moveVector;
+
+    #endregion
+
+    #region Properties
+
+    public Vector3 MoveVector { get { return moveVector; } }
+
+    #endregion
 
     private void Awake()
     {
