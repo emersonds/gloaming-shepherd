@@ -11,9 +11,9 @@ public class PlayerAnimator : MonoBehaviour
     void Start()
     {
         // Animator is attached to the "Sprite" child
-        animator = GetComponentInChildren<Animator>();
+        animator = GetComponent<Animator>();
 
-        pc = GetComponent<PlayerController>();
+        pc = GetComponentInParent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -21,8 +21,20 @@ public class PlayerAnimator : MonoBehaviour
     {
         // If the player is moving, set animator speed to 1
         SetSpeed();
+
         animator.SetFloat("xDir", Mathf.Abs(pc.MoveVector.x));
         animator.SetFloat("zDir", pc.MoveVector.z);
+    }
+
+    public void StartAttack()
+    {
+        animator.SetBool("attacking", true);
+    }
+
+    public void EndAttack()
+    {
+        pc.EndAttack();
+        animator.SetBool("attacking", false);
     }
 
     private void SetSpeed()

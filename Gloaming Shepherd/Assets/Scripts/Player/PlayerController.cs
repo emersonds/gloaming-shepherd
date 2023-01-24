@@ -21,11 +21,16 @@ public class PlayerController : MonoBehaviour
     // Used to move the player from movement input action
     private Vector3 moveVector;
 
+    // If the player can attack
+    private bool canAttack = true;
+    private bool isAttacking = false;
+
     #endregion
 
     #region Properties
 
     public Vector3 MoveVector { get { return moveVector; } }
+    //public bool IsAttacking { get { return isAttacking; } }
 
     #endregion
 
@@ -50,6 +55,9 @@ public class PlayerController : MonoBehaviour
         // When the player is moving, update the move vector
         playerInputs.Default.Walk.performed += ctx => { moveVector = new Vector3(ctx.ReadValue<Vector2>().x, 0f, ctx.ReadValue<Vector2>().y); };
         playerInputs.Default.Walk.canceled += ctx => { moveVector = Vector3.zero; };
+
+        // Attack when the player inputs the attack action
+        playerInputs.Default.Attack.started += Attack;
 
         rb = GetComponent<Rigidbody>();
         sr = GetComponentInChildren<SpriteRenderer>();
@@ -78,6 +86,22 @@ public class PlayerController : MonoBehaviour
         {
             sr.flipX = true;
         }
+    }
+
+    private void Attack(InputAction.CallbackContext ctx)
+    {
+        if (canAttack && !isAttacking)
+        {
+            isAttacking = true;
+            canAttack = false;
+            GetComponentInChildren<PlayerAnimator>().StartAttack();
+        }
+    }
+
+    public void EndAttack()
+    {
+        isAttacking = false;
+        canAttack = true;
     }
 
     /// <summary>

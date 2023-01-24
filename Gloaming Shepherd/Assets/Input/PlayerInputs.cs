@@ -35,6 +35,15 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""8451c016-69d6-4014-9a17-56cf210128b2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Tap"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -55,7 +64,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""MnK"",
                     ""action"": ""Walk"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -66,7 +75,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""MnK"",
                     ""action"": ""Walk"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -77,7 +86,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""MnK"",
                     ""action"": ""Walk"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -88,7 +97,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""MnK"",
                     ""action"": ""Walk"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -99,19 +108,70 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Walk"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""25a48c8b-6332-457c-b37a-314ed6d4d3bb"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""MnK"",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0f697378-9648-4c85-9d0d-5a77b1d10b2d"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""MnK"",
+            ""bindingGroup"": ""MnK"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Gamepad"",
+            ""bindingGroup"": ""Gamepad"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": true,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
         // Default
         m_Default = asset.FindActionMap("Default", throwIfNotFound: true);
         m_Default_Walk = m_Default.FindAction("Walk", throwIfNotFound: true);
+        m_Default_Attack = m_Default.FindAction("Attack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -172,11 +232,13 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Default;
     private IDefaultActions m_DefaultActionsCallbackInterface;
     private readonly InputAction m_Default_Walk;
+    private readonly InputAction m_Default_Attack;
     public struct DefaultActions
     {
         private @PlayerInputs m_Wrapper;
         public DefaultActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Walk => m_Wrapper.m_Default_Walk;
+        public InputAction @Attack => m_Wrapper.m_Default_Attack;
         public InputActionMap Get() { return m_Wrapper.m_Default; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -189,6 +251,9 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @Walk.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnWalk;
                 @Walk.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnWalk;
                 @Walk.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnWalk;
+                @Attack.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnAttack;
+                @Attack.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnAttack;
+                @Attack.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnAttack;
             }
             m_Wrapper.m_DefaultActionsCallbackInterface = instance;
             if (instance != null)
@@ -196,12 +261,34 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @Walk.started += instance.OnWalk;
                 @Walk.performed += instance.OnWalk;
                 @Walk.canceled += instance.OnWalk;
+                @Attack.started += instance.OnAttack;
+                @Attack.performed += instance.OnAttack;
+                @Attack.canceled += instance.OnAttack;
             }
         }
     }
     public DefaultActions @Default => new DefaultActions(this);
+    private int m_MnKSchemeIndex = -1;
+    public InputControlScheme MnKScheme
+    {
+        get
+        {
+            if (m_MnKSchemeIndex == -1) m_MnKSchemeIndex = asset.FindControlSchemeIndex("MnK");
+            return asset.controlSchemes[m_MnKSchemeIndex];
+        }
+    }
+    private int m_GamepadSchemeIndex = -1;
+    public InputControlScheme GamepadScheme
+    {
+        get
+        {
+            if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
+            return asset.controlSchemes[m_GamepadSchemeIndex];
+        }
+    }
     public interface IDefaultActions
     {
         void OnWalk(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
     }
 }
