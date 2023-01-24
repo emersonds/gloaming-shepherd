@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerAnimator : MonoBehaviour
 {
     private Animator animator;
-    private Rigidbody rb;
     private PlayerController pc;
 
     // Start is called before the first frame update
@@ -14,7 +13,6 @@ public class PlayerAnimator : MonoBehaviour
         // Animator is attached to the "Sprite" child
         animator = GetComponentInChildren<Animator>();
 
-        rb = GetComponent<Rigidbody>();
         pc = GetComponent<PlayerController>();
     }
 
@@ -23,7 +21,8 @@ public class PlayerAnimator : MonoBehaviour
     {
         // If the player is moving, set animator speed to 1
         SetSpeed();
-        animator.SetFloat("xDir", Mathf.Abs(rb.velocity.x));
+        animator.SetFloat("xDir", Mathf.Abs(pc.MoveVector.x));
+        animator.SetFloat("zDir", pc.MoveVector.z);
     }
 
     private void SetSpeed()

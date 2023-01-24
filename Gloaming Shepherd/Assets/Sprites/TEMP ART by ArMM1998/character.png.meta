@@ -421,6 +421,153 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Player_BackRun0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 164
+        width: 15
+        height: 23
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5dc101dc3b8d4644b6830e57cc67ca5
+      internalID: 929187411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_BackRun1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 164
+        width: 15
+        height: 23
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1ffe79a94140314a94ca0281ae46851
+      internalID: 772203422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_BackRun2
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 164
+        width: 15
+        height: 23
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df3332de0281e9c479bccfc55ec298ed
+      internalID: -1621153169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_BackAttack0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 69
+        width: 17
+        height: 23
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb12cb1e25d761c468bbab28aeef0cd4
+      internalID: 2120758149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_BackAttack1
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 69
+        width: 17
+        height: 23
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 246a82d0a34d20744a2cab892ae92783
+      internalID: -1388029482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_BackAttack2
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 68
+        width: 17
+        height: 23
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2748320c0de50504aad3aa27ea42ef67
+      internalID: 1605361462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_BackAttack3
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 68
+        width: 17
+        height: 23
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee7908d655a27cc4595728c292c1ccef
+      internalID: -599040797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -446,7 +593,7 @@ TextureImporter:
       character_19: 1761069622
       Player_Run2: -2099105111
       character_12: -1563323879
-      character_2: 344159956
+      Player_BackAttack0: 2120758149
       character_16: 286316371
       character_28: -1321209488
       character_37: -1389384121
@@ -454,12 +601,13 @@ TextureImporter:
       character_23: -170035816
       character_35: 1601825296
       character_24: 381769601
+      Player_BackAttack1: -1388029482
       Player_Run0: 1502687823
       Player_SideAttack2: -1616090405
       Player_SideRun1: -618874424
       character_13: 331513547
+      Player_BackAttack3: -599040797
       character_52: -1736747979
-      character_3: 1209978626
       character_29: -124492284
       character_4: -603918659
       character_8: 159412182
@@ -468,20 +616,21 @@ TextureImporter:
       Player_SideAttack0: -8337602
       Player_SideAttack3: -426919096
       character_33: 1061397445
+      Player_BackRun1: 1099277393
       Player_SideRun2: 1792331182
       character_30: -804005935
       character_21: -719629083
       Player_Idle: 711088088
       character_11: -481251631
       character_15: -470308645
+      Player_BackAttack2: 344159956
       character_53: -1006051632
-      character_1: 1099277393
       character_5: -887812035
       character_14: -1802104424
+      Player_BackRun2: 1209978626
       Player_SideRun0: -426446663
       character_32: -1470874770
       character_50: -1686156878
-      character_0: -765266674
       character_34: -567495347
       character_22: 1386316366
       character_42: 471209443
@@ -489,6 +638,7 @@ TextureImporter:
       character_45: -1006144467
       character_39: 1964048117
       character_9: -1111686281
+      Player_BackRun0: -765266674
       character_17: -1233868354
       character_44: 48563291
       character_43: -834656836
